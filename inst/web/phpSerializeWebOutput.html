@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0042)http://localhost/gastempt/phpSerialize.php -->
+<HTML xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>phpSerialize for R Web Sample</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<META content="MSHTML 6.00.2800.1491" name=GENERATOR></HEAD>
+<BODY>
+<TABLE cellSpacing=3 cellPadding=3 bgColor=#ffffcc border=1>
+  <TBODY>
+  <TR>
+    <TD>Delta</TD>
+    <TD>p-value Wilcox</TD></TR>
+  <TR>
+    <TD>0.7</TD>
+    <TD>0.1230055</TD></TR></TBODY></TABLE>
+<P>Note: We use <CODE>$Wilcox['p.value']</CODE>, because be default 
+<CODE>simplifyMono=TRUE</CODE> in phpSerialize. For 
+<CODE>simplifyMono=FALSE</CODE>, use <CODE>$Wilcox['p.value'][1]</CODE>. The 
+same holds for <CODE>sigma</CODE> and <CODE>r.squared</CODE> in the table 
+below.</P>
+<TABLE cellSpacing=3 cellPadding=3 bgColor=#ffff33 border=1>
+  <TBODY>
+  <TR>
+    <TD>sigma</TD>
+    <TD>r<SUP>2</SUP></TD></TR>
+  <TR>
+    <TD>0.9298678</TD>
+    <TD>0.8451345</TD></TR></TBODY></TABLE>
+<H2>Wilcox asscociative array</H2><PRE>Array
+(
+    [statistic] =&gt; Array
+        (
+            [W] =&gt; 29
+        )
+
+    [parameter] =&gt; 
+    [p.value] =&gt; 0.1230055
+    [null.value] =&gt; Array
+        (
+            [mu] =&gt; 0
+        )
+
+    [alternative] =&gt; two.sided
+    [method] =&gt; Wilcoxon rank sum test
+    [data.name] =&gt; rnorm(10) and rnorm(10) + Delta
+)
+</PRE>
+<H2>lm summary asscociative array</H2><PRE>Array
+(
+    [call] =&gt; Array
+        (
+            [1] =&gt; lm
+            [2] =&gt; weight ~ group
+        )
+
+    [terms] =&gt; Array
+        (
+            [1] =&gt; ~
+            [2] =&gt; weight
+            [3] =&gt; group
+        )
+
+    [residuals] =&gt; Array
+        (
+            [1] =&gt; -1.04711
+            [2] =&gt; 0.2532386
+            [3] =&gt; 1.65132
+            [4] =&gt; -0.09599657
+            [5] =&gt; -1.43652
+            [6] =&gt; 0.1993269
+            [7] =&gt; 1.424555
+            [8] =&gt; 0.1460487
+            [9] =&gt; -0.4965834
+            [10] =&gt; -0.5982789
+            [11] =&gt; -1.01815
+            [12] =&gt; -0.5922277
+            [13] =&gt; -0.9515607
+            [14] =&gt; 0.03507974
+            [15] =&gt; 1.537285
+            [16] =&gt; 0.6587666
+            [17] =&gt; -0.1336858
+            [18] =&gt; -0.8875027
+            [19] =&gt; 0.8971684
+            [20] =&gt; 0.454827
+        )
+
+    [coefficients] =&gt; Array
+        (
+            [1] =&gt; Array
+                (
+                    [1] =&gt; 10.07601
+                    [2] =&gt; 0.29405
+                    [3] =&gt; 34.26631
+                    [4] =&gt; 7.614162E-018
+                )
+
+            [2] =&gt; Array
+                (
+                    [1] =&gt; -4.121526
+                    [2] =&gt; 0.4158495
+                    [3] =&gt; -9.9111
+                    [4] =&gt; 1.02448E-008
+                )
+
+        )
+
+    [aliased] =&gt; Array
+        (
+            [1] =&gt; 
+            [2] =&gt; 
+        )
+
+    [sigma] =&gt; 0.9298678
+    [df] =&gt; Array
+        (
+            [1] =&gt; 2
+            [2] =&gt; 18
+            [3] =&gt; 2
+        )
+
+    [r.squared] =&gt; 0.8451345
+    [adj.r.squared] =&gt; 0.8365309
+    [fstatistic] =&gt; Array
+        (
+            [value] =&gt; 98.22989
+            [numdf] =&gt; 1
+            [dendf] =&gt; 18
+        )
+
+    [cov.unscaled] =&gt; Array
+        (
+            [1] =&gt; Array
+                (
+                    [1] =&gt; 0.1
+                    [2] =&gt; -0.1
+                )
+
+            [2] =&gt; Array
+                (
+                    [1] =&gt; -0.1
+                    [2] =&gt; 0.2
+                )
+
+        )
+
+)
+</PRE></BODY></HTML>
