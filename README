@@ -1,0 +1,54 @@
+New on CRAN: phpSerialize Version 0.8
+Dieter Menne, dieter.menne@menne-biomed.de
+
+Serializes R objects for PHP import into an associative array. 
+Main use is for building web pages with R-support. 
+
+Has mainly been tested with lm,lme, nlme and their summaries.
+
+A web example is provided, showing
+
+-- How to start R from php/Apache
+-- How to pass variables from php to R via Environment
+-- How to create serialized php output from R
+-- How to read the serialized output from php/Apache via pipe
+-- How to display selected results in a table
+-- How to display the structure of the associative array.
+
+For example, the following R structure...
+
+  Delta=as.numeric(Sys.getenv("DELTA")) # Get Info from php
+  wc = wilcox.test(rnorm(10),rnorm(10)+Delta)
+
+... is is piped to standard output
+  cat(phpSerialize(wc),"\n")
+
+... and in PHP after deserialization
+
+  $pp = popen("$Rterm --no-save  --slave  2>&1 < $RFile DELTA=$Delta","r");
+  // Read serialized R output via pipe.
+  $sWilcox=fgets($pp);
+  pclose($pp);
+  $Wilcox=unserialize($sWilcox);
+  print_r($Wilcox);
+
+... prints as follows:
+
+Array
+(
+  [statistic] => Array
+  (
+    [W] => 29
+  )
+
+  [parameter] => 
+  [p.value] => 0.1230055
+  [null.value] => Array
+  (
+    [mu] => 0
+  )
+  [alternative] => two.sided
+  [method] => Wilcoxon rank sum test
+  [data.name] => rnorm(10) and rnorm(10) + Delta
+)
+

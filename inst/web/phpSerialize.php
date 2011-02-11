@@ -17,7 +17,7 @@
   $slm=fgets($pp);
   pclose($pp);
   # Display the stuff
-#  echo $Wilcox;
+#  echo $sWilcox;
 #  echo $slm;
   $Wilcox=unserialize($sWilcox);
   $lm=unserialize($slm);
@@ -33,7 +33,7 @@
   </tr>
 </table>
 <p>
-Note: We use <code>$Wilcox['p.value']</code>, because be default <code>simplifyMono=TRUE</code> in phpSerialize.
+Note: We use <code>$Wilcox['p.value']</code>, because by default <code>simplifyMono=TRUE</code> in phpSerialize.
 For <code>simplifyMono=FALSE</code>, use <code>$Wilcox['p.value'][1]</code>. The same holds for <code>sigma</code>
 and <code>r.squared</code> in the table below.</p>
 <table  border="1" cellpadding="3" cellspacing="3" bgcolor="#FFFF33">

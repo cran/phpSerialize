@@ -1,2 +1,3 @@
 # phpSerialize 
 export(phpSerialize)
+export(phpSerializeAll)

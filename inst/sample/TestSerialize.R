@@ -30,3 +30,7 @@ phpSerialize(lm1,file="testserialize.php",phpTestCode=T,append=F,simplifyMono=T)
 phpSerialize(sumnlm1,file="testserialize.php",phpTestCode=T,append=T)
 phpSerialize(nlm1,file="testserialize.php",phpTestCode=T,append=T)
 phpSerialize(sumfm1,file="testserialize.php",phpTestCode=T,append=T)
+
+# Serialize all. Only "sumfm1" and "sumnlm1" are serialized
+phpSerializeAll(include="sum",exclude=c("sumlm"),
+  file="testserializeAll.php",phpTestCode=TRUE)

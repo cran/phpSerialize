@@ -1,0 +1,8 @@
+=============== phpSerialize ======================
+
+0.8-01 (8.2.2005)
+-- Corrected documentation (Details of simplifyMono)
+-- Added phpSerializeAll
+-- functions are skipped 
+
+0.8-0 First submission 28.2.2005

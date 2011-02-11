@@ -3,6 +3,7 @@
 ### Copyright Dieter Menne
 ### Dr. Menne Biomed Software, Tübingen, Germany
 ### dieter.menne@menne-biomed.de
+### Version 0.8.01
 
 phpSerialize = function(x,file=NULL,append=FALSE,associative="1D",
          simplifyMono=TRUE,phpTestCode=FALSE){
@@ -10,9 +11,34 @@ phpSerialize = function(x,file=NULL,append=FALSE,associative="1D",
     if (phpTestCode) cat("<?php\n$b='")
     phpSer(x,associative=associative,simplifyMono)
     if (phpTestCode) cat("';\nprint_r( unserialize($b));\n?>")
-    cat("\n")
-    },  file=file,append=append)
+    else cat("\n");
+    },  file=file,append=!is.null(file) && append)
   if (!is.null(file)) invisible(ret) else ret
+}
+
+phpSerializeAll = function(include=NULL,exclude=NULL,file=NULL,
+     append=FALSE,associative="1D",simplifyMono=TRUE,
+     phpTestCode=FALSE) {
+  if (!append && !is.null(file) && file.exists(file)) {
+    file.remove(file)
+  }
+  names=ls(1)
+  objs=list()
+  for (i in seq(along=names)) {
+    name=names[i]
+    xf=eval(parse(text=name))
+    if (! (is.null(xf) || is.function(xf))){
+      inInclude=is.null(include) || any(pmatch(include,name),na.rm=TRUE)
+      if (inInclude) {
+        inExclude=!is.null(exclude) && any(pmatch(exclude,name),na.rm=TRUE)
+        if (!inExclude) {
+          objs[[name]]=xf;
+        }
+      }
+    }
+  }
+  phpSerialize(objs,file=file,associative=associative,
+     simplifyMono=simplifyMono,phpTestCode=phpTestCode,append=TRUE)
 }
 
 #--- All the following are internal functions
@@ -85,6 +111,10 @@ phpSer.array = function(x,associative="1D",simplifyMono=TRUE,...) {
 
 phpSer.complex = function(x,associative="1D",simplifyMono=TRUE,...) {
   stop("phpSer of complex numbers not implemented");
+}
+
+# Skip functions
+phpSer.function = function(x,associative="1D",simplifyMono=TRUE,...) {
 }
 
 phpSer.double = function (x,associative="1D",simplifyMono=TRUE,...) {

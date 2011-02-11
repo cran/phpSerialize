@@ -1,5 +1,6 @@
 \name{phpSerialize}
 \alias{phpSerialize}
+\alias{phpSerializeAll}
 \title{ R to PHP Serialization }
 \description{
   Serializes R objects for PHP import into an associative
@@ -8,13 +9,17 @@
 \usage{
 phpSerialize(x, file = NULL, append = FALSE, associative = "1D",
    simplifyMono=TRUE, phpTestCode = FALSE)
+
+phpSerializeAll(include=NULL, exclude=NULL, file = NULL, append = FALSE, 
+   associative = "1D",   simplifyMono=TRUE, phpTestCode = FALSE)
 }
+
 \arguments{
   \item{x}{ an object }
-  \item{file}{ A file name or a connection, or NULL to return
+  \item{file}{ a file name or a connection, or NULL to return
    the output as a string. If the connection is not open it
    will be opened and then closed on exit.}
-  \item{append}{ Append or overwrite the file? }
+  \item{append}{ append or overwrite the file? }
   \item{associative}{ a character string of \code{"1D"} (default),
   \code{"2D"} or \code{"no"}. For \code{"1D"}, only scalars
   and vectors are serialized as associative arrays which can
@@ -31,13 +36,18 @@ phpSerialize(x, file = NULL, append = FALSE, associative = "1D",
   }
   \item{phpTestCode}{ if TRUE, php test code for direct display of
     the associative PHP-array is added.}
-  
+  \item{include}{ a vector of characters strings of the objects in 
+   \code{ls(1)} to be serialized. If \code{NULL}, all \code{ls(1)} 
+   objects will be serialized.  Partial matching is used, so  
+   with \code{include="lm."}, objects like \code{lm.test} and \code{lm.best} 
+   are included. } 
+  \item{exclude}{a vector of character strings of objects excluded from 
+    serialization. Partial matching is used, so \code{exclude="HTML"} will 
+    remove objects like \code{HTMLAll} and \code{HTMLlme}, but not \code{myHTML}.
+    Items in \code{exclude} have precedence over those in \code{include}.}
 }
-\details{
-Scalars are exported as an array with one element. I am considering of making
-this an option in later versions, but I am not sure if this is a good idea. 
-Comments are welcome.
 
+\details{
 See the \code{sample} directory for an extended test case and
 the \code{web} directory for an Apache-tested web application.
 
@@ -45,13 +55,13 @@ Matrices with dimensions > 2 and complex numbers are currently not supported.
 
 }
 \value{
-  Returns a string if file=NULL, else writes the string to the given file. 
+  Returns a string if file=NULL, or NULL if a file argument was supplied.
   For example, \code{phpSerialize(c("a","b"))} produces the output string
   \code{a:2:\{i:1;s:1:"a";i:2;s:1:"b";\}},
   giving \code{Array([1]=>a,[2]=>b)} after unserializing in PHP.
 }
 \references{
- Serialize PHP: \url{http://jpspan.sourceforge.net/examples/serialize_php.php}
+ Serialize PHP: \url{http://jpspan.sourceforge.net/examples/serialize_php.php}. 
  Manual PHP: \url{http://www.php.net/manual/en/index.php}
 }
 \author{ Dieter Menne \email{(dieter.menne@menne-biomed.de)}}
@@ -70,6 +80,7 @@ weight = c(rnorm(10)+10, rnorm(10)+6)
 sumlm = summary(lm(weight ~ group))
 phpSerialize(sumlm,phpTestCode=TRUE)
 
+phpSerializeAll(include="w",exclude="sum",phpTestCode=TRUE)
 }
 \keyword{ interface }
 \keyword{ connection }
